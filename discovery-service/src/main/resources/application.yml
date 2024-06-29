@@ -30,7 +30,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: '*'
+        include: "*"
   tracing:
     sampling:
       probability: 1.0
@@ -39,4 +39,4 @@ logging:
     root: info
     web: debug
     org.springframework.security: debug
-    dev.hobie.discoveryservice: debug
+    dev.hobie.discovery_service: debug
