@@ -4,40 +4,16 @@ spring:
     activate:
       on-profile: docker
 ---
-server:
-  port: 8061
 spring:
   application:
     name: discovery-service
-  cache:
-    type: caffeine
-    caffeine:
-      spec: maximumSize=500,expireAfterAccess=5m
-  cloud:
-    config:
-      enabled: false
-  security:
-    user:
-      name: admin
-      password: pwd
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/
-  server:
-    wait-time-in-ms-when-sync-empty: 0
+  config:
+    import: "optional:configserver:http://localhost:8088"
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-  tracing:
-    sampling:
-      probability: 1.0
 logging:
   level:
     root: info
