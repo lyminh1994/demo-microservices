@@ -1,9 +1,8 @@
 package dev.hobie.employee_service.repository;
 
+import dev.hobie.employee_service.model.Employee;
 import java.util.ArrayList;
 import java.util.List;
-
-import dev.hobie.employee_service.model.Employee;
 
 public class EmployeeRepository {
 
