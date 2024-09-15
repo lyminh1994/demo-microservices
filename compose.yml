@@ -1,5 +1,6 @@
 services:
   postgres:
+    container_name: postgres
     image: postgres:latest
     environment:
       - "POSTGRES_DB=${POSTGRES_DB}"
@@ -22,6 +23,28 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${SPRING_RABBITMQ_USER}  # Set username for RabbitMQ management UI
       RABBITMQ_DEFAULT_PASS: ${SPRING_RABBITMQ_PASS}  # Set password for RabbitMQ management UI
+  keycloak:
+    container_name: keycloak
+    image: bitnami/keycloak:latest
+    command: start
+    environment:
+      KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
+      KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
+      KEYCLOAK_HOSTNAME: localhost
+      KEYCLOAK_HOSTNAME_ADMIN: localhost
+      KEYCLOAK_HTTP_PORT: 8080
+      KEYCLOAK_ENABLE_HEALTH_ENDPOINTS: true
+      KEYCLOAK_DATABASE_VENDOR: postgresql
+      KEYCLOAK_DATABASE_HOST: postgres
+      KEYCLOAK_DATABASE_PORT: 5432
+      KEYCLOAK_DATABASE_NAME: ${POSTGRES_DB}
+      KEYCLOAK_DATABASE_USER: ${POSTGRES_USER}
+      KEYCLOAK_DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "80:8080"
+    restart: always
+    depends_on:
+      - postgres
   config-service:
     image: config-service:0.0.1-SNAPSHOT
     ports:
