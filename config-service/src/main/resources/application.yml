@@ -9,6 +9,9 @@ spring:
         git:
           uri: ${SPRING_CLOUD_CONFIG_SERVER_GIT_URI}
           default-label: ${SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT_LABEL}
+  output:
+    ansi:
+      enabled: always
   rabbitmq:
     host: ${SPRING_RABBITMQ_HOST}
     port: ${SPRING_RABBITMQ_PORT}
@@ -17,6 +20,9 @@ spring:
 encrypt:
   key: ${ENCRYPT_KEY}
 logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){blue} %clr(${LOG_LEVEL_PATTERN:-%5p}) %m%n"
   level:
     root: info
     web: trace
+    dev.hobie.config_service: info
