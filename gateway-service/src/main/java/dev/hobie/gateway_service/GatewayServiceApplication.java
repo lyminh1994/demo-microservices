@@ -7,11 +7,13 @@ import org.springdoc.core.properties.AbstractSwaggerUiConfigProperties.SwaggerUr
 import org.springdoc.core.properties.SwaggerUiConfigParameters;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.gateway.route.RouteDefinitionLocator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 
+@EnableCaching
 @EnableDiscoveryClient
 @SpringBootApplication
 public class GatewayServiceApplication {
