@@ -3,6 +3,9 @@ server:
 spring:
   application:
     name: config-service
+  threads:
+    virtual:
+      enabled: true
   cloud:
     config:
       server:
