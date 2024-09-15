@@ -9,16 +9,5 @@ server:
 spring:
   application:
     name: organization-service
-  cloud:
-    config:
-      enabled: false
-springdoc:
-  packagesToScan: dev.hobie.organization
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://admin:pwd@localhost:8061/eureka/
-management:
-  tracing:
-    sampling:
-      probability: 1.0
+  config:
+    import: "optional:configserver:http://localhost:8088"
