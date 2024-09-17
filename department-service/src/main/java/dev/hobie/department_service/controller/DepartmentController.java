@@ -5,12 +5,14 @@ import dev.hobie.department_service.model.Department;
 import dev.hobie.department_service.repository.DepartmentRepository;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class DepartmentController {
@@ -25,6 +27,7 @@ public class DepartmentController {
 
   @GetMapping("/{id}")
   public Department findById(@PathVariable("id") Long id) {
+    log.info("Department find: id={}", id);
     return repository.findById(id);
   }
 
@@ -35,12 +38,14 @@ public class DepartmentController {
 
   @GetMapping("/organization/{organizationId}")
   public List<Department> findByOrganization(@PathVariable("organizationId") Long organizationId) {
+    log.info("Department find: organizationId={}", organizationId);
     return repository.findByOrganization(organizationId);
   }
 
   @GetMapping("/organization/{organizationId}/with-employees")
   public List<Department> findByOrganizationWithEmployees(
       @PathVariable("organizationId") Long organizationId) {
+    log.info("Department find with employees: organizationId={}", organizationId);
     var departments = repository.findByOrganization(organizationId);
     return departments.stream()
         .map(
