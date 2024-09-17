@@ -1,14 +1,13 @@
 package dev.hobie.department_service.repository;
 
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import org.junit.jupiter.api.Assertions;
+import dev.hobie.department_service.model.Department;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-
-import dev.hobie.department_service.model.Department;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class DepartmentRepositoryTest {
@@ -18,33 +17,33 @@ class DepartmentRepositoryTest {
   @Test
   @Order(1)
   void testAddDepartment() {
-    Department department = new Department(1L, "Test");
+    var department = new Department(1L, "Test");
     department = repository.add(department);
-    Assertions.assertNotNull(department);
-    Assertions.assertEquals(1L, department.getId());
+    assertNotNull(department, "Department is null.");
+    assertEquals(1L, department.id(), "Department bad id.");
   }
 
   @Test
   @Order(2)
   void testFindAll() {
-    List<Department> departments = repository.findAll();
-    Assertions.assertEquals(1, departments.size());
-    Assertions.assertEquals(1L, departments.get(0).getId());
+    var departments = repository.findAll();
+    assertEquals(1, departments.size(), "Departments size is wrong.");
+    assertEquals(1L, departments.getFirst().id(), "Department bad id.");
   }
 
   @Test
   @Order(3)
   void testFindByOrganization() {
-    List<Department> departments = repository.findByOrganization(1L);
-    Assertions.assertEquals(1, departments.size());
-    Assertions.assertEquals(1L, departments.get(0).getId());
+    var departments = repository.findByOrganization(1L);
+    assertEquals(1, departments.size(), "Departments size is wrong.");
+    assertEquals(1L, departments.getFirst().id(), "Department bad id.");
   }
 
   @Test
   @Order(4)
   void testFindById() {
-    Department department = repository.findById(1L);
-    Assertions.assertNotNull(department);
-    Assertions.assertEquals(1L, department.getId());
+    var department = repository.findById(1L);
+    assertNotNull(department, "Department not found.");
+    assertEquals(1L, department.id(), "Department bad id.");
   }
 }

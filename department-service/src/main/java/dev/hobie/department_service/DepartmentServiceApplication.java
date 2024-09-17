@@ -25,7 +25,7 @@ public class DepartmentServiceApplication {
 
   @Bean
   DepartmentRepository repository() {
-    DepartmentRepository repository = new DepartmentRepository();
+    var repository = new DepartmentRepository();
     repository.add(new Department(1L, "Development"));
     repository.add(new Department(1L, "Operations"));
     repository.add(new Department(2L, "Development"));

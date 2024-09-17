@@ -34,9 +34,9 @@ class DepartmentControllerTest {
   void findById() {
     var department = restTemplate.getForObject("/{id}", Department.class, 1L);
     Assertions.assertNotNull(department);
-    Assertions.assertNotNull(department.getId());
-    Assertions.assertNotNull(department.getName());
-    Assertions.assertEquals(1L, department.getId());
+    Assertions.assertNotNull(department.id());
+    Assertions.assertNotNull(department.name());
+    Assertions.assertEquals(1L, department.id());
   }
 
   @Test
@@ -61,7 +61,7 @@ class DepartmentControllerTest {
     var department = Instancio.create(Department.class);
     department = restTemplate.postForObject("/", department, Department.class);
     Assertions.assertNotNull(department);
-    Assertions.assertNotNull(department.getId());
-    Assertions.assertNotNull(department.getName());
+    Assertions.assertNotNull(department.id());
+    Assertions.assertNotNull(department.name());
   }
 }
