@@ -17,7 +17,7 @@ public class OrganizationRepository {
             organization.departments(),
             organization.employees());
     organizations.add(newOrganization);
-    return organization;
+    return newOrganization;
   }
 
   public Organization findById(Long id) {
