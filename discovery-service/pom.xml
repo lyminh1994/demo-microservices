@@ -12,14 +12,14 @@
   <name>discovery-service</name>
   <description>Demo project for Discovery Server</description>
 
-  <properties>
-    <httpclient.version>4.5.14</httpclient.version>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-config</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-cache</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
@@ -31,10 +31,10 @@
         </exclusion>
       </exclusions>
     </dependency>
+
     <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <version>${httpclient.version}</version>
+      <groupId>com.github.ben-manes.caffeine</groupId>
+      <artifactId>caffeine</artifactId>
     </dependency>
   </dependencies>
 
