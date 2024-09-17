@@ -20,6 +20,7 @@ public class EmployeeController {
 
   @PostMapping("/")
   public Employee add(@RequestBody Employee employee) {
+    log.info("Employee add: {}", employee);
     return repository.add(employee);
   }
 
@@ -31,6 +32,7 @@ public class EmployeeController {
 
   @GetMapping("/")
   public List<Employee> findAll() {
+    log.info("Employee find all");
     return repository.findAll();
   }
 

@@ -24,11 +24,13 @@ public class OrganizationController {
 
   @PostMapping("/")
   public Organization add(@RequestBody Organization organization) {
+    log.info("Organization add: {}", organization);
     return repository.add(organization);
   }
 
   @GetMapping("/")
   public List<Organization> findAll() {
+    log.info("Organization find all");
     return repository.findAll();
   }
 

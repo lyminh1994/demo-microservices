@@ -22,6 +22,7 @@ public class DepartmentController {
 
   @PostMapping("/")
   public Department add(@RequestBody Department department) {
+    log.info("Department add: {}", department);
     return repository.add(department);
   }
 
@@ -33,6 +34,7 @@ public class DepartmentController {
 
   @GetMapping("/")
   public List<Department> findAll() {
+    log.info("Department find all");
     return repository.findAll();
   }
 
