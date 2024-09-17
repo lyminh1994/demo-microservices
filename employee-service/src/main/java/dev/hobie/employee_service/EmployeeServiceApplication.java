@@ -23,17 +23,17 @@ public class EmployeeServiceApplication {
 
   @Bean
   EmployeeRepository repository() {
-    EmployeeRepository repository = new EmployeeRepository();
+    var repository = new EmployeeRepository();
     repository.add(new Employee(1L, 1L, "John Smith", 34, "Analyst"));
     repository.add(new Employee(1L, 1L, "Darren Hamilton", 37, "Manager"));
-    repository.add(new Employee(1L, 1L, "Tom Scott", 26, "Developer"));
+    repository.add(new Employee(1L, 1L, "Tom Scott", 26, "Tester"));
     repository.add(new Employee(1L, 2L, "Anna London", 39, "Analyst"));
-    repository.add(new Employee(1L, 2L, "Patrick Dempsey", 27, "Developer"));
+    repository.add(new Employee(1L, 2L, "Patrick Dempsey", 27, "Tester"));
     repository.add(new Employee(2L, 3L, "Kevin Price", 38, "Developer"));
-    repository.add(new Employee(2L, 3L, "Ian Scott", 34, "Developer"));
+    repository.add(new Employee(2L, 3L, "Ian Scott", 34, "Designer"));
     repository.add(new Employee(2L, 3L, "Andrew Campton", 30, "Manager"));
     repository.add(new Employee(2L, 4L, "Steve Franklin", 25, "Developer"));
-    repository.add(new Employee(2L, 4L, "Elisabeth Smith", 30, "Developer"));
+    repository.add(new Employee(2L, 4L, "Elisabeth Smith", 30, "QA"));
     return repository;
   }
 }

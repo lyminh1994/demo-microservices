@@ -1,21 +1,9 @@
 package dev.hobie.employee_service.model;
 
-import lombok.Data;
-
-@Data
-public class Employee {
-  private Long id;
-  private Long organizationId;
-  private Long departmentId;
-  private String name;
-  private int age;
-  private String position;
+public record Employee(
+    Long id, Long organizationId, Long departmentId, String name, int age, String position) {
 
   public Employee(Long organizationId, Long departmentId, String name, int age, String position) {
-    this.organizationId = organizationId;
-    this.departmentId = departmentId;
-    this.name = name;
-    this.age = age;
-    this.position = position;
+    this(null, organizationId, departmentId, name, age, position);
   }
 }

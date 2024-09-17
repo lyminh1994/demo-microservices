@@ -1,13 +1,15 @@
 package dev.hobie.employee_service.controller;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import dev.hobie.employee_service.model.Employee;
 import org.instancio.Instancio;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-
-import dev.hobie.employee_service.model.Employee;
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
@@ -21,39 +23,38 @@ class EmployeeControllerTest {
 
   @Test
   void findAll() {
-    Employee[] employees = restTemplate.getForObject("/", Employee[].class);
-    Assertions.assertTrue(employees.length > 0);
+    var employees = restTemplate.getForObject("/", Employee[].class);
+    assertTrue(employees.length > 0);
   }
 
   @Test
   void findById() {
-    Employee employee = restTemplate.getForObject("/{id}", Employee.class, 1L);
-    Assertions.assertNotNull(employee);
-    Assertions.assertNotNull(employee.getId());
-    Assertions.assertNotNull(employee.getName());
-    Assertions.assertEquals(1L, employee.getId());
+    var employee = restTemplate.getForObject("/{id}", Employee.class, 1L);
+    assertNotNull(employee);
+    assertNotNull(employee.id());
+    assertNotNull(employee.name());
+    assertEquals(1L, employee.id());
   }
 
   @Test
   void findByOrganization() {
-    Employee[] employees =
+    var employees =
         restTemplate.getForObject("/organization/{organizationId}", Employee[].class, 1L);
-    Assertions.assertTrue(employees.length > 0);
+    assertTrue(employees.length > 0);
   }
 
   @Test
   void findByDepartment() {
-    Employee[] employees =
-        restTemplate.getForObject("/department/{departmentId}", Employee[].class, 1L);
-    Assertions.assertTrue(employees.length > 0);
+    var employees = restTemplate.getForObject("/department/{departmentId}", Employee[].class, 1L);
+    assertTrue(employees.length > 0);
   }
 
   @Test
   void add() {
-    Employee employee = Instancio.create(Employee.class);
+    var employee = Instancio.create(Employee.class);
     employee = restTemplate.postForObject("/", employee, Employee.class);
-    Assertions.assertNotNull(employee);
-    Assertions.assertNotNull(employee.getId());
-    Assertions.assertNotNull(employee.getName());
+    assertNotNull(employee);
+    assertNotNull(employee.id());
+    assertNotNull(employee.name());
   }
 }
