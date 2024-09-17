@@ -9,14 +9,3 @@ spring:
     name: discovery-service
   config:
     import: "optional:configserver:http://localhost:8088"
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-logging:
-  level:
-    root: info
-    web: debug
-    org.springframework.security: debug
-    dev.hobie.discovery_service: debug

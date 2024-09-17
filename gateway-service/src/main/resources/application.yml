@@ -9,18 +9,3 @@ spring:
     name: gateway-service
   config:
     import: "optional:configserver:http://localhost:8088"
-management:
-  endpoint:
-    health:
-      probes:
-        enabled: true
-  health:
-    livenessstate:
-      enabled: true
-    readinessstate:
-      enabled: true
-logging:
-  level:
-    root: info
-    web: debug
-    dev.hobie.gateway_service: debug

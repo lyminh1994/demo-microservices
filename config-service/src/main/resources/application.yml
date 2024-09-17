@@ -22,7 +22,3 @@ encrypt:
 logging:
   pattern:
     console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){blue} %clr(${LOG_LEVEL_PATTERN:-%5p}) %m%n"
-  level:
-    root: info
-    web: trace
-    dev.hobie.config_service: info
