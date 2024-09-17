@@ -1,12 +1,14 @@
 package dev.hobie.organization_service.repository;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import dev.hobie.organization_service.model.Organization;
+import java.util.List;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
-
-import dev.hobie.organization_service.model.Organization;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class OrganizationRepositoryTest {
@@ -16,25 +18,25 @@ class OrganizationRepositoryTest {
   @Test
   @Order(1)
   void testAddOrganization() {
-    var organization = new Organization("Test", "Test Street");
+    Organization organization = new Organization("Test", "Test Street");
     organization = repository.add(organization);
-    Assertions.assertNotNull(organization);
-    Assertions.assertEquals(1L, organization.getId());
+    assertNotNull(organization, "Organization is null.");
+    assertEquals(1L, organization.id(), "Organization bad id.");
   }
 
   @Test
   @Order(2)
   void testFindAll() {
-    var organizations = repository.findAll();
-    Assertions.assertEquals(1, organizations.size());
-    Assertions.assertEquals(1L, organizations.get(0).getId());
+    List<Organization> organizations = repository.findAll();
+    assertEquals(1, organizations.size(), "Organizations size is wrong.");
+    assertEquals(1L, organizations.getFirst().id(), "Organization bad id.");
   }
 
   @Test
   @Order(3)
   void testFindById() {
-    var organization = repository.findById(1L);
-    Assertions.assertNotNull(organization);
-    Assertions.assertEquals(1L, organization.getId());
+    Organization organization = repository.findById(1L);
+    assertNotNull(organization, "Organization not found.");
+    assertEquals(1L, organization.id(), "Organization bad id.");
   }
 }

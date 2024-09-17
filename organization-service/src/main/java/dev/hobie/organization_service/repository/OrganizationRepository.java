@@ -1,22 +1,27 @@
 package dev.hobie.organization_service.repository;
 
+import dev.hobie.organization_service.model.Organization;
 import java.util.ArrayList;
 import java.util.List;
-
-import dev.hobie.organization_service.model.Organization;
 
 public class OrganizationRepository {
 
   private final List<Organization> organizations = new ArrayList<>();
 
   public Organization add(Organization organization) {
-    organization.setId((long) (organizations.size() + 1));
-    organizations.add(organization);
+    var newOrganization =
+        new Organization(
+            organizations.size() + 1L,
+            organization.name(),
+            organization.address(),
+            organization.departments(),
+            organization.employees());
+    organizations.add(newOrganization);
     return organization;
   }
 
   public Organization findById(Long id) {
-    return organizations.stream().filter(a -> a.getId().equals(id)).findFirst().orElseThrow();
+    return organizations.stream().filter(a -> a.id().equals(id)).findFirst().orElseThrow();
   }
 
   public List<Organization> findAll() {

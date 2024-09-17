@@ -2,12 +2,11 @@ package dev.hobie.organization_service.controller;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.hobie.organization_service.model.Organization;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-
-import dev.hobie.organization_service.model.Organization;
 
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
@@ -15,7 +14,7 @@ import dev.hobie.organization_service.model.Organization;
       "spring.cloud.discovery.enabled=false",
       "spring.cloud.config.discovery.enabled=false"
     })
-class OrganizationControllerTest {
+class OrganizationControllerTests {
 
   @Autowired TestRestTemplate restTemplate;
 
@@ -29,8 +28,8 @@ class OrganizationControllerTest {
   void findById() {
     var o = restTemplate.getForObject("/{id}", Organization.class, 1);
     assertNotNull(o);
-    assertNotNull(o.getId());
-    assertEquals(1, o.getId());
+    assertNotNull(o.id());
+    assertEquals(1, o.id());
   }
 
   @Test
@@ -38,7 +37,7 @@ class OrganizationControllerTest {
     var o = new Organization("Test", "Test1");
     o = restTemplate.postForObject("/", o, Organization.class);
     assertNotNull(o);
-    assertNotNull(o.getId());
-    assertEquals(3, o.getId());
+    assertNotNull(o.id());
+    assertEquals(3, o.id());
   }
 }
