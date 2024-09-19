@@ -37,7 +37,7 @@ class GatewayApplicationTest {
 
   @Container
   static KeycloakContainer keycloak =
-      new KeycloakContainer().withRealmImportFile("realm-export.json").withExposedPorts(8080);
+      new KeycloakContainer().withRealmImportFile("realm-export.json").withExposedPorts(8080, 9000);
 
   @DynamicPropertySource
   static void registerResourceServerIssuerProperty(DynamicPropertyRegistry registry) {
