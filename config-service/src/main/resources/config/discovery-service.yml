@@ -1,6 +1,15 @@
 server:
   port: 8061
 
+spring:
+  output:
+    ansi:
+      enabled: always
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=500,expireAfterAccess=5m
+
 eureka:
   instance:
     hostname: localhost
@@ -10,16 +19,11 @@ eureka:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
 
-logging:
-  pattern:
-    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){blue} %clr(${LOG_LEVEL_PATTERN:-%5p}) %m%n"
-
-spring:
-  output:
-    ansi:
-      enabled: always
-
 management:
   tracing:
     sampling:
       probability: 1.0
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){blue} %clr(${LOG_LEVEL_PATTERN:-%5p}) %m%n"

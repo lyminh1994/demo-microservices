@@ -2,6 +2,16 @@ server:
   port: 0
   forward-headers-strategy: framework
 
+spring:
+  output:
+    ansi:
+      enabled: always
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost/realms/demo/protocol/openid-connect/certs
+
 eureka:
   client:
     serviceUrl:
@@ -9,24 +19,19 @@ eureka:
   instance:
     instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
-logging:
-  pattern:
-    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){blue} %clr([%X{traceId:-},%X{spanId:-}]){cyan} %clr(${LOG_LEVEL_PATTERN:-%5p}) %m%n"
-
-springdoc:
-  packagesToScan: pl.piomin.services.organization
-  cache:
-    disabled: true
-  version: '@springdoc.version@'
-  api-docs:
-    version: openapi_3_1
-
-spring:
-  output:
-    ansi:
-      enabled: always
-
 management:
   tracing:
     sampling:
       probability: 1.0
+
+springdoc:
+  packagesToScan: dev.hobie.organization_service
+  cache:
+    disabled: true
+  version: "@springdoc.version@"
+  api-docs:
+    version: openapi_3_1
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){blue} %clr([%X{traceId:-},%X{spanId:-}]){cyan} %clr(${LOG_LEVEL_PATTERN:-%5p}) %m%n"
