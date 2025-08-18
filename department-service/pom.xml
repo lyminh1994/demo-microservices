@@ -13,8 +13,8 @@
   <description>Demo project for Department Service</description>
 
   <properties>
-    <springdoc.version>2.8.9</springdoc.version>
-    <instancio-junit.version>5.5.1</instancio-junit.version>
+    <springdoc.version>2.6.0</springdoc.version>
+    <instancio-junit.version>5.0.2</instancio-junit.version>
   </properties>
 
   <dependencies>
