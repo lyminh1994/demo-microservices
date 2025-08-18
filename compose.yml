@@ -25,7 +25,7 @@ services:
       RABBITMQ_DEFAULT_PASS: ${SPRING_RABBITMQ_PASS}  # Set password for RabbitMQ management UI
   keycloak:
     container_name: keycloak
-    image: bitnami/keycloak:latest
+    image: keycloak/keycloak:latest
     environment:
       KEYCLOAK_ADMIN: ${KEYCLOAK_ADMIN}
       KEYCLOAK_ADMIN_PASSWORD: ${KEYCLOAK_ADMIN_PASSWORD}
@@ -40,6 +40,8 @@ services:
       KEYCLOAK_DATABASE_PASSWORD: ${POSTGRES_PASSWORD}
     ports:
       - "80:8080"
+    command:
+      - "start-dev"
     restart: always
     depends_on:
       - postgres
