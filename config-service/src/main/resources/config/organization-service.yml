@@ -17,6 +17,7 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:8061/eureka/
   instance:
+    preferIpAddress: true
     instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
 
 management:
@@ -25,12 +26,9 @@ management:
       probability: 1.0
 
 springdoc:
-  packagesToScan: dev.hobie.organization_service
   cache:
     disabled: true
-  version: "@springdoc.version@"
-  api-docs:
-    version: openapi_3_1
+  version: "@project.version@"
 
 logging:
   pattern:

@@ -1,9 +1,11 @@
 package dev.hobie.gateway;
 
+import static org.springdoc.core.utils.Constants.DEFAULT_API_DOCS_URL;
+
+import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
-import org.springdoc.core.properties.AbstractSwaggerUiConfigProperties.SwaggerUrl;
-import org.springdoc.core.properties.SwaggerUiConfigParameters;
+import org.springdoc.core.properties.AbstractSwaggerUiConfigProperties;
+import org.springdoc.core.properties.SwaggerUiConfigProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
@@ -21,20 +23,22 @@ public class GatewayApplication {
 
   @Bean
   @Lazy(false)
-  public Set<SwaggerUrl> apis(
-      RouteDefinitionLocator locator, SwaggerUiConfigParameters swaggerUiConfigParameters) {
+  public Set<AbstractSwaggerUiConfigProperties.SwaggerUrl> apis(
+      RouteDefinitionLocator locator, SwaggerUiConfigProperties swaggerUiConfigProperties) {
+    Set<AbstractSwaggerUiConfigProperties.SwaggerUrl> urls = new HashSet<>();
     var definitions = locator.getRouteDefinitions().collectList().block();
     assert definitions != null;
-    var urls =
-        definitions.stream()
-            .filter(routeDefinition -> routeDefinition.getId().matches(".*-service"))
-            .map(
-                routeDefinition -> {
-                  var name = routeDefinition.getId().replace("-service", "");
-                  return new SwaggerUrl(name, "/" + name, null);
-                })
-            .collect(Collectors.toSet());
-    swaggerUiConfigParameters.setUrls(urls);
+    definitions.stream()
+        .filter(routeDefinition -> routeDefinition.getId().matches(".*-service"))
+        .forEach(
+            routeDefinition -> {
+              var name = routeDefinition.getId().replace("-service", "");
+              var swaggerUrl =
+                  new AbstractSwaggerUiConfigProperties.SwaggerUrl(
+                      name, DEFAULT_API_DOCS_URL + "/" + name, null);
+              urls.add(swaggerUrl);
+            });
+    swaggerUiConfigProperties.setUrls(urls);
     return urls;
   }
 }

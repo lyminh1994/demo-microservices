@@ -1,0 +1,30 @@
+package dev.hobie.gateway.config;
+
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.GATEWAY_REQUEST_URL_ATTR;
+import static org.springframework.cloud.gateway.support.ServerWebExchangeUtils.addOriginalRequestUrl;
+
+import org.springframework.cloud.gateway.filter.GatewayFilter;
+import org.springframework.cloud.gateway.filter.factory.RewritePathGatewayFilterFactory;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ContextPathRewritePathGatewayFilterFactory extends RewritePathGatewayFilterFactory {
+
+  @Override
+  public GatewayFilter apply(Config config) {
+    var replacement = config.getReplacement().replace("$\\", "$");
+    return (exchange, chain) -> {
+      var req = exchange.getRequest();
+
+      addOriginalRequestUrl(exchange, req.getURI());
+      var path = req.getURI().getRawPath();
+
+      var newPath = path.replaceAll(config.getRegexp(), replacement);
+      var request = req.mutate().path(newPath).contextPath("/").build();
+
+      exchange.getAttributes().put(GATEWAY_REQUEST_URL_ATTR, request.getURI());
+
+      return chain.filter(exchange.mutate().request(request).build());
+    };
+  }
+}

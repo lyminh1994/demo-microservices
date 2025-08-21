@@ -12,36 +12,41 @@ spring:
       spec: maximumSize=500,expireAfterAccess=5m
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
-      default-filters:
-        - TokenRelay=
-      routes:
-        - id: employee-service
-          uri: lb://employee-service
-          predicates:
-            - Path=/employee/**
-          filters:
-            - RewritePath=/employee/(?<path>.*), /$\{path}
-        - id: department-service
-          uri: lb://department-service
-          predicates:
-            - Path=/department/**
-          filters:
-            - RewritePath=/department/(?<path>.*), /$\{path}
-        - id: organization-service
-          uri: lb://organization-service
-          predicates:
-            - Path=/organization/**
-          filters:
-            - RewritePath=/organization/(?<path>.*), /$\{path}
-        - id: openapi
-          uri: http://localhost:${server.port}
-          predicates:
-            - Path=/v3/api-docs/**
-          filters:
-            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+      server:
+        webflux:
+          httpclient:
+            ssl:
+              use-insecure-trust-manager: true
+          discovery:
+            locator:
+              enabled: true
+          default-filters:
+            - TokenRelay=
+          routes:
+            - id: employee-service
+              uri: lb://employee-service
+              predicates:
+                - Path=/employee/**
+              filters:
+                - RewritePath=/employee/(?<path>.*), /$\{path}
+            - id: department-service
+              uri: lb://department-service
+              predicates:
+                - Path=/department/**
+              filters:
+                - RewritePath=/department/(?<path>.*), /$\{path}
+            - id: organization-service
+              uri: lb://organization-service
+              predicates:
+                - Path=/organization/**
+              filters:
+                - RewritePath=/organization/(?<path>.*), /$\{path}
+            - id: openapi
+              uri: http://localhost:${server.port}
+              predicates:
+                - Path=/v3/api-docs/**
+              filters:
+                - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
   security:
     oauth2:
       resourceserver:
@@ -63,6 +68,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8061/eureka/
+  instance:
+    preferIpAddress: true
 
 management:
   tracing:
@@ -72,11 +79,9 @@ management:
 springdoc:
   cache:
     disabled: true
-  version: "@springdoc.version@"
+  version: "@project.version@"
   swagger-ui:
     use-root-path: true
-  api-docs:
-    version: openapi_3_1
 
 logging:
   pattern:

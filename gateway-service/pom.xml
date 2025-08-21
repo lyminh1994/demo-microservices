@@ -12,11 +12,6 @@
   <name>gateway-service</name>
   <description>Demo project for Gateway Server</description>
 
-  <properties>
-    <springdoc.version>2.6.0</springdoc.version>
-    <testcontainers-keycloak.version>3.4.0</testcontainers-keycloak.version>
-  </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
@@ -40,7 +35,7 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-gateway</artifactId>
+      <artifactId>spring-cloud-starter-gateway-server-webflux</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
@@ -60,11 +55,6 @@
       <artifactId>opentelemetry-exporter-zipkin</artifactId>
     </dependency>
 
-    <dependency>
-      <groupId>org.springdoc</groupId>
-      <artifactId>springdoc-openapi-starter-webflux-api</artifactId>
-      <version>${springdoc.version}</version>
-    </dependency>
     <dependency>
       <groupId>org.springdoc</groupId>
       <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
