@@ -8,14 +8,8 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>employee-service</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>employee-service</name>
   <description>Demo project for Employee Service</description>
-
-  <properties>
-    <springdoc.version>2.6.0</springdoc.version>
-    <instancio-junit.version>5.0.2</instancio-junit.version>
-  </properties>
 
   <dependencies>
     <dependency>
@@ -37,6 +31,10 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-bus-amqp</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>

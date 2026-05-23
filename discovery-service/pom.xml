@@ -8,18 +8,17 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>discovery-service</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>discovery-service</name>
   <description>Demo project for Discovery Server</description>
 
   <dependencies>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-config</artifactId>
+      <artifactId>spring-cloud-starter-bus-amqp</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-cache</artifactId>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-config</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
@@ -40,7 +39,7 @@
           <plugin>
             <groupId>com.google.cloud.tools</groupId>
             <artifactId>jib-maven-plugin</artifactId>
-            <version>3.4.3</version>
+            <version>3.5.1</version>
             <configuration>
               <from>
                 <image>eclipse-temurin:21-jre</image>

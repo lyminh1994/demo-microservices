@@ -8,14 +8,13 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>config-service</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>config-service</name>
   <description>Demo project for Config Server</description>
 
   <dependencies>
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-config-server</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-actuator</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
@@ -23,7 +22,7 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-stream-binder-rabbit</artifactId>
+      <artifactId>spring-cloud-starter-bus-amqp</artifactId>
     </dependency>
   </dependencies>
 
@@ -35,7 +34,7 @@
           <plugin>
             <groupId>com.google.cloud.tools</groupId>
             <artifactId>jib-maven-plugin</artifactId>
-            <version>3.4.3</version>
+            <version>3.5.1</version>
             <configuration>
               <from>
                 <image>eclipse-temurin:21-jre</image>
