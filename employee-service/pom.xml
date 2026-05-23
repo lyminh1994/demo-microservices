@@ -8,7 +8,6 @@
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <artifactId>employee-service</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
   <name>employee-service</name>
   <description>Demo project for Employee Service</description>
 
@@ -32,6 +31,10 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-starter-bus-amqp</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.cloud</groupId>
