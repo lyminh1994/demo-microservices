@@ -12,8 +12,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.json.JacksonJsonParser;
-import org.springframework.boot.test.autoconfigure.web.reactive.AutoConfigureWebTestClient;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.webtestclient.autoconfigure.AutoConfigureWebTestClient;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.DynamicPropertyRegistry;
@@ -22,6 +22,7 @@ import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.testcontainers.containers.RabbitMQContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -36,8 +37,13 @@ class GatewayApplicationTest {
   @Autowired WebTestClient webTestClient;
 
   @Container
+  static RabbitMQContainer rabbitMQ = new RabbitMQContainer("rabbitmq:4.2.6-management-alpine");
+
+  @Container
   static KeycloakContainer keycloak =
-      new KeycloakContainer().withRealmImportFile("realm-export.json").withExposedPorts(8080, 9000);
+      new KeycloakContainer("keycloak/keycloak:latest")
+          .withRealmImportFile("realm-export.json")
+          .withExposedPorts(8080, 9000);
 
   @DynamicPropertySource
   static void registerResourceServerIssuerProperty(DynamicPropertyRegistry registry) {
@@ -50,6 +56,10 @@ class GatewayApplicationTest {
     registry.add("spring.cloud.gateway.routes[0].uri", () -> "http://localhost:8060");
     registry.add("spring.cloud.gateway.routes[0].id", () -> "employee-service");
     registry.add("spring.cloud.gateway.routes[0].predicates[0]", () -> "Path=/call-me/**");
+    registry.add("spring.rabbitmq.host", () -> rabbitMQ.getHost());
+    registry.add("spring.rabbitmq.port", () -> rabbitMQ.getAmqpPort());
+    registry.add("spring.rabbitmq.username", () -> rabbitMQ.getAdminUsername());
+    registry.add("spring.rabbitmq.password", () -> rabbitMQ.getAdminPassword());
   }
 
   @Test

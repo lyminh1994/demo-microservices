@@ -1,18 +1,19 @@
 package dev.hobie.department_service.controller;
 
+import dev.hobie.department_service.client.EmployeeClient;
+import dev.hobie.department_service.model.Department;
+import dev.hobie.department_service.model.Employee;
 import org.instancio.Instancio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.resttestclient.TestRestTemplate;
+import org.springframework.boot.resttestclient.autoconfigure.AutoConfigureTestRestTemplate;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 
-import dev.hobie.department_service.client.EmployeeClient;
-import dev.hobie.department_service.model.Department;
-import dev.hobie.department_service.model.Employee;
-
+@AutoConfigureTestRestTemplate
 @SpringBootTest(
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT,
     properties = {
@@ -22,7 +23,7 @@ import dev.hobie.department_service.model.Employee;
 class DepartmentControllerTest {
 
   @Autowired TestRestTemplate restTemplate;
-  @MockBean EmployeeClient employeeClient;
+  @MockitoBean EmployeeClient employeeClient;
 
   @Test
   void findAll() {

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface EmployeeClient {
 
   @GetMapping("/organization/{organizationId}")
-  List<Employee> findByOrganization(@PathVariable("organizationId") Long organizationId);
+  List<Employee> findByOrganization(@PathVariable Long organizationId);
 
   @GetMapping("/call-me/ping")
   String callMePing();
