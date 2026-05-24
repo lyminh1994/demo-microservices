@@ -10,8 +10,6 @@ spring:
           basedir: ${SPRING_CLOUD_CONFIG_SERVER_GIT_BASEDIR}
           uri: ${SPRING_CLOUD_CONFIG_SERVER_GIT_URI}
           default-label: ${SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT_LABEL}
-          host-key-algorithm: ${SPRING_CLOUD_CONFIG_SERVER_GIT_HOST_KEY_ALGORITHM}
-          host-key: ${SPRING_CLOUD_CONFIG_SERVER_GIT_HOST_KEY}
   output:
     ansi:
       enabled: always
