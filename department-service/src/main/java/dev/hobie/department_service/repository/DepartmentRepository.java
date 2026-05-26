@@ -1,9 +1,8 @@
 package dev.hobie.department_service.repository;
 
+import dev.hobie.department_service.model.Department;
 import java.util.ArrayList;
 import java.util.List;
-
-import dev.hobie.department_service.model.Department;
 
 public class DepartmentRepository {
 
