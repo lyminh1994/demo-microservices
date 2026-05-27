@@ -11,6 +11,12 @@
     <name>gateway-service</name>
     <description>Demo project for Gateway Server</description>
 
+    <properties>
+        <testcontainers-junit-jupiter.version>1.21.4</testcontainers-junit-jupiter.version>
+        <testcontainers-keycloak.version>4.2.1</testcontainers-keycloak.version>
+        <testcontainers-rabbitmq.version>1.21.4</testcontainers-rabbitmq.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>

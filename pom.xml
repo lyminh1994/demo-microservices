@@ -26,11 +26,6 @@
         <java.version>25</java.version>
         <spring-cloud.version>2025.1.1</spring-cloud.version>
         <springdoc.version>3.0.3</springdoc.version>
-        <testcontainers-junit-jupiter.version>1.21.4</testcontainers-junit-jupiter.version>
-        <testcontainers-postgresql.version>1.21.4</testcontainers-postgresql.version>
-        <testcontainers-keycloak.version>4.2.1</testcontainers-keycloak.version>
-        <testcontainers-rabbitmq.version>1.21.4</testcontainers-rabbitmq.version>
-        <instancio-junit.version>5.5.1</instancio-junit.version>
     </properties>
 
     <dependencyManagement>

@@ -11,6 +11,12 @@
     <name>department-service</name>
     <description>Demo project for Department Service</description>
 
+    <properties>
+        <testcontainers-junit-jupiter.version>1.21.4</testcontainers-junit-jupiter.version>
+        <testcontainers-postgresql.version>1.21.4</testcontainers-postgresql.version>
+        <instancio-junit.version>5.5.1</instancio-junit.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
