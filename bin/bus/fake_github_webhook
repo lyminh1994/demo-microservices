@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 wh_payload=$(cat fake_github_webhook_payload.json)
-curl -X POST -H"X-Github-Event: push" -d '$wh_payload' http://localhost:8888/monitor?path=client.properties
+curl -X POST -H"X-Github-Event: push" -H"X-Hub-Signature: sha1=479813b79800690be36f6d6972bce6df4236b530" -d "$wh_payload" http://localhost:8888/monitor
