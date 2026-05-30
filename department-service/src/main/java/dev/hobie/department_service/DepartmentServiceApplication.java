@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Bean;
 @OpenAPIDefinition(
     info =
         @Info(
-            title = "Department API",
-            version = "1.0",
-            description = "Documentation Department API v1.0"))
+            title = "${springdoc.name}",
+            version = "${springdoc.version}",
+            description = "${springdoc.description}"))
 public class DepartmentServiceApplication {
 
   public static void main(String[] args) {
