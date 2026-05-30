@@ -1,0 +1,32 @@
+server:
+  port: 0
+  forward-headers-strategy: framework
+
+spring:
+  output:
+    ansi:
+      enabled: always
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8061/eureka/
+  instance:
+    preferIpAddress: true
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+
+springdoc:
+  name: department-service
+  version: 1.0.0
+  description: This is the configuration for the Department Service application.
+  cache:
+    disabled: true
+
+logging:
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss}){blue} %clr([%X{traceId:-},%X{spanId:-}]){cyan} %clr(${LOG_LEVEL_PATTERN:-%5p}) %m%n"

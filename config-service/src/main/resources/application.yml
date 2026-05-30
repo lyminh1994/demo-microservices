@@ -4,13 +4,8 @@ server:
 spring:
   application:
     name: @project.name@
-  cloud:
-    config:
-      server:
-        git:
-          basedir: ${SPRING_CLOUD_CONFIG_SERVER_GIT_BASEDIR}
-          uri: ${SPRING_CLOUD_CONFIG_SERVER_GIT_URI}
-          default-label: ${SPRING_CLOUD_CONFIG_SERVER_GIT_DEFAULT_LABEL}
+  profiles:
+    active: native
   output:
     ansi:
       enabled: always

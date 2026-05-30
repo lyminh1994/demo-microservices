@@ -1,0 +1,86 @@
+server:
+  port: 8060
+
+spring:
+  output:
+    ansi:
+      enabled: always
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=500,expireAfterAccess=5m
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      default-filters:
+        - TokenRelay=
+      routes:
+        - id: employee-service
+          uri: lb://employee-service
+          predicates:
+            - Path=/employee/**
+          filters:
+            - RewritePath=/employee/(?<path>.*), /$\{path}
+        - id: department-service
+          uri: lb://department-service
+          predicates:
+            - Path=/department/**
+          filters:
+            - RewritePath=/department/(?<path>.*), /$\{path}
+        - id: organization-service
+          uri: lb://organization-service
+          predicates:
+            - Path=/organization/**
+          filters:
+            - RewritePath=/organization/(?<path>.*), /$\{path}
+        - id: openapi
+          uri: http://localhost:${server.port}
+          predicates:
+            - Path=/v3/api-docs/**
+          filters:
+            - RewritePath=/v3/api-docs/(?<path>.*), /$\{path}/v3/api-docs
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://keycloak/realms/demo/protocol/openid-connect/certs
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://keycloak/realms/demo
+        registration:
+          spring-with-test-scope:
+            provider: keycloak
+            client-id: spring-with-test-scope
+            client-secret: IWLSnakHG8aNTWNaWuSj0a11UY4lzxd9
+            authorization-grant-type: authorization_code
+            scope: openid
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://discovery-service:8061/eureka/
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+  zipkin:
+    tracing:
+      endpoint: http://zipkin:9411/api/v2/spans
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: employee
+        url: /v3/api-docs/employee
+      - name: department
+        url: /v3/api-docs/department
+      - name: organization
+        url: /v3/api-docs/organization
+
+logging:
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%X{traceId:-},%X{spanId:-}] ${LOG_LEVEL_PATTERN:-%5p} %m%n"
