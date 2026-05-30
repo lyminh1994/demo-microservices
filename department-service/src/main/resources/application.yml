@@ -14,8 +14,8 @@ spring:
   rabbitmq:
     host: ${SPRING_RABBITMQ_HOST:localhost}
     port: ${SPRING_RABBITMQ_PORT:5672}
-    username: ${SPRING_RABBITMQ_USER:rabbit}
-    password: ${SPRING_RABBITMQ_PASS:password}
+    username: ${SPRING_RABBITMQ_USER:user}
+    password: ${SPRING_RABBITMQ_PASS:secret}
   http:
     serviceclient:
       employee-service:
